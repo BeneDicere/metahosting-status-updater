@@ -55,4 +55,4 @@ target/
 
 # PyCharm
 .idea/
-
+build.sh
