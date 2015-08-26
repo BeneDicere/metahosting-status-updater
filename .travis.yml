@@ -10,6 +10,6 @@ install:
  - "pip install --upgrade git+https://github.com/BeneDicere/metahosting-common"
 script:
  - find . -name "*.py" -exec pep8 {} \;
- - nosetests --with-coverage --cover-package=config_manager,stores,queue_manager
- - radon mi config_manager queue_manager stores
- - radon cc config_manager queue_manager stores
+ - nosetests --with-coverage --cover-package=stores,queue_manager
+ - radon mi queue_manager stores
+ - radon cc queue_manager stores
