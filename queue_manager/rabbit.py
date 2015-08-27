@@ -1,8 +1,9 @@
 import pika
 import logging
 import json
-from retrying import retry
 import threading
+
+from retrying import retry
 
 
 class BlockingPikaManager(object):

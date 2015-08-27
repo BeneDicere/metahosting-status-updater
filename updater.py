@@ -1,19 +1,17 @@
 #!/usr/bin/env python
 
-from datetime import datetime
-from metahosting.common import argument_parsing, logging_setup
-from metahosting.common.config_manager \
-    import get_backend_class, get_configuration
-from queue_manager import subscribe
-from time import sleep, ctime
-
-import argparse
 import logging
 import signal
 
+from datetime import datetime
+from metahosting.common import argument_parsing, config_manager, logging_setup
+from queue_manager import subscribe
+from time import sleep, ctime
+
+
 class Updater(object):
     def __init__(self, config):
-        persistence_class = get_backend_class(config)
+        persistence_class = config_manager.get_backend_class(config)
         self.datapoints = persistence_class(config=config)
         self.running = False
 
@@ -43,7 +41,13 @@ class Updater(object):
 def run():
     arguments = argument_parsing()
     logging_setup(arguments=arguments)
-    config = get_configuration('persistence')
+
+    if arguments.config:
+        config_manager._CONFIG_FILE = arguments.config
+    if arguments.envfile:
+        config_manager._VARIABLES_FILE = arguments.envfile
+
+    config = config_manager.get_configuration('persistence')
     updater = Updater(config=config)
 
     signal.signal(signal.SIGTERM, updater.stop)

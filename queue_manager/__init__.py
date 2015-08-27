@@ -1,5 +1,6 @@
 import copy
 import logging
+
 from metahosting.common.config_manager import get_configuration
 from queue_manager.rabbit import BlockingPikaManager
 
