@@ -1,0 +1,5 @@
+status-updater:
+  image: benedicere/metahosting-status-updater
+  external_links:
+    - metahostinghtml_messaging_1:messaging
+    - metahostinghtml_db_1:db
